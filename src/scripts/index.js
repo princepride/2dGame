@@ -1,6 +1,8 @@
 import '../styles/index.scss';
 import Matter from 'matter-js';
 
+const renderWidth = 1078
+const renderHeight = 718
 const image = new Image();
 image.src = "download.png";
 image.onerror = function() {
