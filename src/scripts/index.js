@@ -1,35 +1,54 @@
 import '../styles/index.scss';
 import Matter from 'matter-js';
 
+const image = new Image();
+image.src = "download.png";
+image.onerror = function() {
+    console.error("Failed to load image");
+};
 // module aliases
-var Engine = Matter.Engine,
+const Engine = Matter.Engine,
     Render = Matter.Render,
     Runner = Matter.Runner,
     Bodies = Matter.Bodies,
+    Body = Matter.Body,
     Composite = Matter.Composite;
-
-// create an engine
-var engine = Engine.create();
-
-// create a renderer
-var render = Render.create({
-    element: document.body,
-    engine: engine
+const iEngine = Engine.create();
+const iRunner = Runner.create();
+const iRender = Render.create({
+  element: document.body,
+  engine: iEngine,
+  options: {
+    width: 1800,
+    height: 1200,
+    wireframes: false,
+    background: "white"
+  }
+});
+const boxA = Bodies.rectangle(400, 200, 80, 80, {
+    render: {
+        sprite: {
+            texture: image.src
+        }
+    }
+});
+document.addEventListener("keydown", function(event) {
+    if (event.keyCode === 65) {
+        // Left arrow key was pressed
+        Body.applyForce(boxA, boxA.position, { x: -0.1, y: 0 });
+    } else if (event.keyCode === 68) {
+        // Right arrow key was pressed
+        Body.applyForce(boxA, boxA.position, { x: 0.1, y: 0 });
+    }
+    else if (event.keyCode === 87) {
+        // Up arrow key was pressed
+        Body.applyForce(boxA, boxA.position, { x: 0, y: -0.2 });
+    }
 });
 
-// create two boxes and a ground
-var boxA = Bodies.rectangle(400, 200, 80, 80);
-var boxB = Bodies.rectangle(450, 50, 80, 80);
-var ground = Bodies.rectangle(400, 610, 810, 200, { isStatic: true });
-
-// add all of the bodies to the world
-Composite.add(engine.world, [boxA, boxB, ground]);
-
-// run the renderer
-Render.run(render);
-
-// create runner
-var runner = Runner.create();
-
-// run the engine
-Runner.run(runner, engine);
+const ballA = Bodies.circle(380, 100, 40, 10);
+const ballB = Bodies.circle(460, 10, 40, 10);
+const ground = Bodies.rectangle(900, 1200, 1800, 20, { isStatic: true });
+Composite.add(iEngine.world, [boxA, ballA, ballB, ground]);
+Render.run(iRender);
+Runner.run(iRunner, iEngine);
