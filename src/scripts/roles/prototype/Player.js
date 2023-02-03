@@ -17,14 +17,14 @@ class Player {
         });
     }
     action = (event, Body) => {
-        if (event.keyCode === 65) {
+        if (event.key === 'a') {
             // Left arrow key was pressed
             Body.applyForce(this.body, this.body.position, { x: -0.1, y: 0 });
-        } else if (event.keyCode === 68) {
+        } else if (event.key === 'd') {
             // Right arrow key was pressed
             Body.applyForce(this.body, this.body.position, { x: 0.1, y: 0 });
         }
-        else if (event.keyCode === 87) {
+        else if (event.key === 'w') {
             // Up arrow key was pressed
             Body.applyForce(this.body, this.body.position, { x: 0, y: -0.2 });
         }
