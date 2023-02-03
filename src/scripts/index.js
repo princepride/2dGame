@@ -28,9 +28,9 @@ const iRender = Render.create({
   }
 });
 const player = new Player(400, 200, Bodies);
-compositeObjects = compositeObjects.concat(player.body);
+compositeObjects = compositeObjects.concat(player.bodies);
 const ground = new Ground(config.width, config.height, config.thickness, Bodies);
-compositeObjects = compositeObjects.concat(ground.body);
+compositeObjects = compositeObjects.concat(ground.bodies);
 document.addEventListener("keydown", (event) => player.action(event,Body));
 
 Composite.add(iEngine.world, compositeObjects);

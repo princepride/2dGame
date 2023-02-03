@@ -1,6 +1,7 @@
 class Player {
 
     constructor(x, y, Bodies) {
+        this.upTriggleTime = 0;
         this.x = x;
         this.y = y;
         this.height = 80;
@@ -15,18 +16,25 @@ class Player {
                 }
             }
         });
+        this.bodies = [this.body];
     }
     action = (event, Body) => {
         if (event.key === 'a') {
             // Left arrow key was pressed
-            Body.applyForce(this.body, this.body.position, { x: -0.1, y: 0 });
+            if(this.body.velocity.x > -1) {
+                Body.applyForce(this.body, this.body.position, { x: -0.05, y: 0 });
+            }
         } else if (event.key === 'd') {
             // Right arrow key was pressed
-            Body.applyForce(this.body, this.body.position, { x: 0.1, y: 0 });
+            if(this.body.velocity.x < 1) {
+                console.log(this.body.velocity.x);
+                Body.applyForce(this.body, this.body.position, { x: 0.05, y: 0 });
+            }
         }
-        else if (event.key === 'w') {
+        else if (event.key === 'w' && this.upTriggleTime < 2) {
             // Up arrow key was pressed
-            Body.applyForce(this.body, this.body.position, { x: 0, y: -0.2 });
+            Body.applyForce(this.body, this.body.position, { x: 0, y: -0.1 });
+            upTriggleTime ++;
         }
     };
 }
