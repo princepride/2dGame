@@ -1,13 +1,10 @@
 import '../styles/index.scss';
 import Matter from 'matter-js';
+import Player from './roles/prototype/Player.js';
 
-const renderWidth = 1078
-const renderHeight = 718
-const image = new Image();
-image.src = "download.png";
-image.onerror = function() {
-    console.error("Failed to load image");
-};
+//const image = new Image();
+//image.src = "download.png";
+
 // module aliases
 const Engine = Matter.Engine,
     Render = Matter.Render,
@@ -21,16 +18,17 @@ const iRender = Render.create({
   element: document.body,
   engine: iEngine,
   options: {
-    width: 1800,
-    height: 1200,
+    width: 1500,
+    height: 690,
     wireframes: false,
     background: "white"
   }
 });
-const boxA = Bodies.rectangle(400, 200, 80, 80, {
+const player = new Player(400, 200);
+const boxA = Bodies.rectangle(player.x, player.y, player.width, player.height, {
     render: {
         sprite: {
-            texture: image.src
+            texture: player.image.src
         }
     }
 });
@@ -50,7 +48,7 @@ document.addEventListener("keydown", function(event) {
 
 const ballA = Bodies.circle(380, 100, 40, 10);
 const ballB = Bodies.circle(460, 10, 40, 10);
-const ground = Bodies.rectangle(900, 1200, 1800, 20, { isStatic: true });
+const ground = Bodies.rectangle(750, 685, 1500, 10, { isStatic: true });
 Composite.add(iEngine.world, [boxA, ballA, ballB, ground]);
 Render.run(iRender);
 Runner.run(iRunner, iEngine);
