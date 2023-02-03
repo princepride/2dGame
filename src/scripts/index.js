@@ -48,7 +48,12 @@ document.addEventListener("keydown", function(event) {
 
 const ballA = Bodies.circle(380, 100, 40, 10);
 const ballB = Bodies.circle(460, 10, 40, 10);
-const ground = Bodies.rectangle(750, 685, 1500, 10, { isStatic: true });
-Composite.add(iEngine.world, [boxA, ballA, ballB, ground]);
+const ground = [
+    Bodies.rectangle(750, 685, 1500, 10, { isStatic: true }),
+    Bodies.rectangle(750, 5, 1500, 10, { isStatic: true }),
+    Bodies.rectangle(5, 345, 10, 690, { isStatic: true }),
+    Bodies.rectangle(1495, 345, 10, 690, { isStatic: true })
+];
+Composite.add(iEngine.world, [boxA, ballA, ballB].concat(ground));
 Render.run(iRender);
 Runner.run(iRunner, iEngine);
