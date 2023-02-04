@@ -18,6 +18,7 @@ class Player {
         });
         this.bodies = [this.body];
     }
+
     action = (event, Body) => {
         if (event.key === 'a') {
             // Left arrow key was pressed
@@ -34,8 +35,9 @@ class Player {
         else if (event.key === 'w' && this.upTriggleTime < 2) {
             // Up arrow key was pressed
             Body.applyForce(this.body, this.body.position, { x: 0, y: -0.1 });
-            upTriggleTime ++;
+            this.upTriggleTime ++;
         }
+
     };
 }
 export default Player;

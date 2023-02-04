@@ -31,8 +31,12 @@ const player = new Player(400, 200, Bodies);
 compositeObjects = compositeObjects.concat(player.bodies);
 const ground = new Ground(config.width, config.height, config.thickness, Bodies);
 compositeObjects = compositeObjects.concat(ground.bodies);
-document.addEventListener("keydown", (event) => player.action(event,Body));
-
+document.addEventListener("keydown", (event) => player.action(event,Body,Engine,iEngine));
+Engine.events.on(iEngine, 'afterUpdate', function() {
+  if (player.body.position.y <= 645) {
+    player.triggerCount = 0;
+  }
+});
 Composite.add(iEngine.world, compositeObjects);
 Render.run(iRender);
 Runner.run(iRunner, iEngine);
