@@ -32,11 +32,18 @@ class Player {
                 Body.applyForce(this.body, this.body.position, { x: 0.05, y: 0 });
             }
         }
-        else if (event.key === 'w' && this.upTriggleTime < 2) {
+        else if (event.key === 'w') {
             // Up arrow key was pressed
+            if (event.repeat) return;
             Body.applyForce(this.body, this.body.position, { x: 0, y: -0.1 });
-            this.upTriggleTime ++;
         }
+        //else if (event.key === 'w' ) {
+        //    this.upTriggleTime ++;
+        //    if (this.upTriggleTime%4 < 2){
+        //        // Up arrow key was pressed
+        //        Body.applyForce(this.body, this.body.position, { x: 0, y: -0.1 });
+        //    }
+        //}
 
     };
 }
