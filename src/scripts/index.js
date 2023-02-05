@@ -9,6 +9,7 @@ import config from '../config.js';
 
 // module aliases
 let compositeObjects = [];
+
 const Engine = Matter.Engine,
     Render = Matter.Render,
     Runner = Matter.Runner,
@@ -42,3 +43,7 @@ document.addEventListener("keydown", (event) => {
 Composite.add(iEngine.world, compositeObjects);
 Render.run(iRender);
 Runner.run(iRunner, iEngine);
+
+setInterval(function() {
+  Matter.Engine.update(iEngine, 1000 / 60);
+}, 1000 / 60);

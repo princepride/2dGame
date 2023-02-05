@@ -1,3 +1,5 @@
+//import Bullet from './Bullet.js';
+
 class Player {
 
     constructor(x, y, Bodies) {
@@ -16,6 +18,7 @@ class Player {
                 }
             }
         });
+        this.body.velocity.x = 2;
         this.bodies = [this.body];
     }
 
@@ -37,12 +40,8 @@ class Player {
             if (event.repeat) return;
             Body.applyForce(this.body, this.body.position, { x: 0, y: -0.1 });
         }
-        //else if (event.key === 'w' ) {
-        //    this.upTriggleTime ++;
-        //    if (this.upTriggleTime%4 < 2){
-        //        // Up arrow key was pressed
-        //        Body.applyForce(this.body, this.body.position, { x: 0, y: -0.1 });
-        //    }
+        //else if (event.keyCode === 32) {
+            
         //}
 
     };
