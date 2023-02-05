@@ -10,6 +10,7 @@ class Player {
         this.width = 80;
         this.image = new Image();
         this.image.src = "download.png";
+        this.Bodies = Bodies;
         this.body = Bodies.rectangle(this.x, this.y, this.width, this.height, {
             restitution: 0, //设置弹性系数
             render: {
@@ -18,7 +19,6 @@ class Player {
                 }
             }
         });
-        this.body.velocity.x = 2;
         this.bodies = [this.body];
     }
 
@@ -40,9 +40,9 @@ class Player {
             if (event.repeat) return;
             Body.applyForce(this.body, this.body.position, { x: 0, y: -0.1 });
         }
-        //else if (event.keyCode === 32) {
-            
-        //}
+        else if (event.keyCode === 32) {
+            new Bullet(this.x, this.y, 2, 0, this.Bodies);
+        }
 
     };
 }

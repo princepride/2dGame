@@ -43,7 +43,8 @@ document.addEventListener("keydown", (event) => {
 Composite.add(iEngine.world, compositeObjects);
 Render.run(iRender);
 Runner.run(iRunner, iEngine);
-
+console.log();
 setInterval(function() {
-  Matter.Engine.update(iEngine, 1000 / 60);
+
+  //player.body.position.x += 2;
 }, 1000 / 60);
